@@ -1,0 +1,38 @@
+{
+  "name": "AHJ-RxJS-frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Antyfeev96/AHJ-RxJS-frontend.git",
+  "author": "Dmitri Antyfeev <60137521+Antyfeev96@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack serve",
+    "lint": "eslint .",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "css-loader": "^5.2.0",
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-webpack-plugin": "^2.5.3",
+    "html-loader": "^2.1.2",
+    "html-webpack-plugin": "^5.3.1",
+    "mini-css-extract-plugin": "^1.4.1",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.30.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.14",
+    "@babel/preset-env": "^7.13.12",
+    "babel-loader": "^8.2.2",
+    "core-js": "^3.10.0",
+    "live-server": "^1.2.1",
+    "sass": "^1.32.8"
+  }
+}
