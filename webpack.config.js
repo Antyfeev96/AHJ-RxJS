@@ -68,7 +68,7 @@ module.exports = {
   },
 
   devServer: {
-    host: '127.0.0.1',
+    host: 'localhost',
     open: true,
     contentBase: path.resolve(__dirname, './src/index.js'),
     watchContentBase: true,

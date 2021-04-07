@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 100px auto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.mailer {
+  width: 300px;
+  height: fit-content;
+  padding: 15px;
+  border: 3px solid grey;
+  border-radius: 10px;
+  font-size: 16px;
+
+  &__text {
+    text-align: center;
+  }
+
+  &__textarea {
+    margin-top: 10px;
+    width: 100%;
+    height: 50px;
+    resize: none;
+  }
+}
+
+.messages {
+  width: 550px;
+  padding: 15px;
+
+  &__incoming {
+    margin-bottom: 15px;
+  }
+  
+  .message {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    border: 1px solid grey;
+
+    :nth-child(n + 2) {
+      margin-left: 10px;
+    }
+    
+    &:nth-of-type(n + 2) {
+      border-top: none;
+    }
+  }
+  
+}
