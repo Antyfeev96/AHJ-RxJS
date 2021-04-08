@@ -6,24 +6,25 @@ export default class AppRender {
   init() {
     this.container = document.createElement('div');
     this.container.className = 'container';
-    this.container.append(this.renderTextarea(), this.renderMessages());
+    this.container.append(this.renderMessages());
     this.body.append(this.container);
-    this.renderMessage();
+    this.renderMessage('23:38 07.04.2021');
+    this.renderMessage('15:43 08.04.2021');
   }
 
-  renderTextarea() {
-    this.mailerEl = document.createElement('div');
-    this.mailerEl.className = 'mailer';
-    this.mailerTitleEl = document.createElement('div');
-    this.mailerTitleEl.className = 'mailer__title';
-    this.mailerTitleEl.textContent = 'Введите сообщение';
-    this.mailerTextareaEl = document.createElement('textarea');
-    this.mailerTextareaEl.className = 'mailer__textarea';
-    this.mailerTextareaEl.name = 'message';
-    this.mailerTextareaEl.placeholder = 'Ваше сообщение...';
-    this.mailerEl.append(this.mailerTitleEl, this.mailerTextareaEl);
-    return this.mailerEl;
-  }
+  // renderTextarea() {
+  //   this.mailerEl = document.createElement('div');
+  //   this.mailerEl.className = 'mailer';
+  //   this.mailerTitleEl = document.createElement('div');
+  //   this.mailerTitleEl.className = 'mailer__title';
+  //   this.mailerTitleEl.textContent = 'Введите сообщение';
+  //   this.mailerTextareaEl = document.createElement('textarea');
+  //   this.mailerTextareaEl.className = 'mailer__textarea';
+  //   this.mailerTextareaEl.name = 'message';
+  //   this.mailerTextareaEl.placeholder = 'Ваше сообщение...';
+  //   this.mailerEl.append(this.mailerTitleEl, this.mailerTextareaEl);
+  //   return this.mailerEl;
+  // }
 
   renderMessages() {
     this.messagesEl = document.createElement('div');
@@ -35,7 +36,7 @@ export default class AppRender {
     return this.messagesEl;
   }
 
-  renderMessage() {
+  renderMessage(time) {
     this.messageEl = document.createElement('div');
     this.messageEl.className = 'message';
     this.contactEl = document.createElement('div');
@@ -46,8 +47,8 @@ export default class AppRender {
     this.textEl.textContent = 'Hello from Mishka';
     this.timestampEl = document.createElement('div');
     this.timestampEl.className = 'message__timestamp';
-    this.timestampEl.textContent = '23:38 07.04.2021';
+    this.timestampEl.textContent = time;
     this.messageEl.append(this.contactEl, this.textEl, this.timestampEl);
-    this.messagesEl.append(this.messageEl);
+    this.incomingEl.insertAdjacentElement('afterend', this.messageEl);
   }
 }
