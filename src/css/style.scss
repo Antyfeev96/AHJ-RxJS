@@ -1,34 +1,39 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+}
+
 .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin: 100px auto;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .messages {
   width: 550px;
-  padding: 15px;
+  // padding: 15px;
+  margin: 100px auto;
 
   &__incoming {
     margin-bottom: 15px;
   }
   
   .message {
-    width: 80%;
     display: flex;
-    justify-content: space-around;
     padding: 15px;
     border: 1px solid grey;
-
-    :nth-child(n + 2) {
-      margin-left: 10px;
-    }
     
     &:nth-of-type(n + 2) {
       border-top: none;
     }
+
+    &__contact {
+      width: 225px;
+    }
+
+    &__timestamp {
+      margin-right: 0;
+      margin-left: auto;
+    }
   }
-  
 }
