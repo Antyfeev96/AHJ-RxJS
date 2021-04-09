@@ -1,6 +1,3 @@
-import { fromEvent, range, filter, Subject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
 export default class AppController {
   constructor(layout, api) {
     this.layout = layout;
@@ -10,14 +7,15 @@ export default class AppController {
   init() {
     this.layout.init();
     this.messagesEl = document.querySelector('.messages');
+    this.api.initStream();
   }
 
   async sendRequest(method) {
-    const response = await this.api.fetchJSON(method);
+    this.response = await this.api.fetchJSON(method);
     while (this.messagesEl.lastChild && this.messagesEl.lastChild.nodeName === 'DIV') {
       this.messagesEl.lastChild.remove();
     }
-    for (const message of response.messages) {
+    for (const message of this.response.messages) {
       this.layout.renderMessage(message.from, message.subject, message.received);
     }
   }

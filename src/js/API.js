@@ -1,4 +1,14 @@
+import { from } from 'rxjs';
+
 export default class API {
+  async initStream() {
+    // this.element = element;
+    this.apiPromise = await fetch('http://localhost:7070/');
+    from(this.apiPromise).subscribe((result) => console.log(result.json()));
+    // const result = await this.apiPromise.json();
+    // return result;
+  }
+
   async fetchJSON(method) {
     try {
       this.formData = new FormData();

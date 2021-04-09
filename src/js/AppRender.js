@@ -21,6 +21,7 @@ export default class AppRender {
   }
 
   renderMessage(email, text, timestamp) {
+    this.text = text.length <= 15 ? text : `${text.substr(0, 15)}...`;
     this.messageEl = document.createElement('div');
     this.messageEl.className = 'message';
     this.contactEl = document.createElement('div');
@@ -28,7 +29,7 @@ export default class AppRender {
     this.contactEl.textContent = email;
     this.textEl = document.createElement('div');
     this.textEl.className = 'message__text';
-    this.textEl.textContent = text;
+    this.textEl.textContent = this.text;
     this.timestampEl = document.createElement('div');
     this.timestampEl.className = 'message__timestamp';
     this.timestampEl.textContent = timestamp;
