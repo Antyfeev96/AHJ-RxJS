@@ -6,10 +6,16 @@ export default class AppController {
 
   init() {
     this.layout.init();
+    this.messagesEl = document.querySelector('.messages');
   }
 
-  async fetch(url) {
-    const response = await this.api.fetchJSON(url);
-    console.log(await response);
+  async sendRequest(method) {
+    const response = await this.api.fetchJSON(method);
+    while (this.messagesEl.lastChild && this.messagesEl.lastChild.nodeName === 'DIV') {
+      this.messagesEl.lastChild.remove();
+    }
+    for (const message of response.messages) {
+      this.layout.renderMessage(message.from, message.subject, message.received);
+    }
   }
 }

@@ -1,8 +1,8 @@
 export default class API {
-  async fetchJSON() {
+  async fetchJSON(method) {
     try {
       this.formData = new FormData();
-      this.formData.append('method', 'addMessage');
+      this.formData.append('method', method);
 
       const response = await fetch(
         `http://localhost:7070/?method=${this.formData.get('method')}`,

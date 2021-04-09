@@ -4,4 +4,4 @@ import AppRender from './AppRender';
 
 const app = new AppController(new AppRender(), new API());
 app.init();
-app.fetch('http://localhost:7070/');
+app.sendRequest('getMessages');

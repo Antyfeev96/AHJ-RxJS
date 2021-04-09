@@ -8,23 +8,7 @@ export default class AppRender {
     this.container.className = 'container';
     this.container.append(this.renderMessages());
     this.body.append(this.container);
-    this.renderMessage('23:38 07.04.2021');
-    this.renderMessage('15:43 08.04.2021');
   }
-
-  // renderTextarea() {
-  //   this.mailerEl = document.createElement('div');
-  //   this.mailerEl.className = 'mailer';
-  //   this.mailerTitleEl = document.createElement('div');
-  //   this.mailerTitleEl.className = 'mailer__title';
-  //   this.mailerTitleEl.textContent = 'Введите сообщение';
-  //   this.mailerTextareaEl = document.createElement('textarea');
-  //   this.mailerTextareaEl.className = 'mailer__textarea';
-  //   this.mailerTextareaEl.name = 'message';
-  //   this.mailerTextareaEl.placeholder = 'Ваше сообщение...';
-  //   this.mailerEl.append(this.mailerTitleEl, this.mailerTextareaEl);
-  //   return this.mailerEl;
-  // }
 
   renderMessages() {
     this.messagesEl = document.createElement('div');
@@ -36,18 +20,18 @@ export default class AppRender {
     return this.messagesEl;
   }
 
-  renderMessage(time) {
+  renderMessage(email, text, timestamp) {
     this.messageEl = document.createElement('div');
     this.messageEl.className = 'message';
     this.contactEl = document.createElement('div');
     this.contactEl.className = 'message__contact';
-    this.contactEl.textContent = 'dima@mishka';
+    this.contactEl.textContent = email;
     this.textEl = document.createElement('div');
     this.textEl.className = 'message__text';
-    this.textEl.textContent = 'Hello from Mishka';
+    this.textEl.textContent = text;
     this.timestampEl = document.createElement('div');
     this.timestampEl.className = 'message__timestamp';
-    this.timestampEl.textContent = time;
+    this.timestampEl.textContent = timestamp;
     this.messageEl.append(this.contactEl, this.textEl, this.timestampEl);
     this.incomingEl.insertAdjacentElement('afterend', this.messageEl);
   }
