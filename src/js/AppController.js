@@ -7,7 +7,7 @@ export default class AppController {
   init() {
     this.layout.init();
     this.messagesEl = document.querySelector('.messages');
-    this.api.initStream();
+    this.response = this.api.initStream(); // перенести в отдельный метод
   }
 
   async sendRequest(method) {
