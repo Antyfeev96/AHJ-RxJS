@@ -6,7 +6,7 @@ import { ajax } from 'rxjs/ajax';
 
 export default class API {
   async initStream() {
-    this.stream$ = ajax.getJSON('http://localhost:7070/messages/unread');
+    this.stream$ = ajax.getJSON('https://ahj-rxjs-backend.herokuapp.com/messages/unread');
     from(this.stream$).pipe(
       map((value) => value.messages),
     ).subscribe((value) => {
