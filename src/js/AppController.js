@@ -1,22 +1,34 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-return-assign */
 export default class AppController {
   constructor(layout, api) {
     this.layout = layout;
     this.api = api;
   }
 
-  init() {
+  async init() {
     this.layout.init();
     this.messagesEl = document.querySelector('.messages');
-    this.response = this.api.initStream(); // перенести в отдельный метод
+    this.initStream();
   }
 
-  async sendRequest(method) {
-    this.response = await this.api.fetchJSON(method);
-    while (this.messagesEl.lastChild && this.messagesEl.lastChild.nodeName === 'DIV') {
-      this.messagesEl.lastChild.remove();
-    }
-    for (const message of this.response.messages) {
-      this.layout.renderMessage(message.from, message.subject, message.received);
+  async initStream() {
+    setInterval(async () => {
+      while (this.messagesEl.lastChild && this.messagesEl.lastChild.nodeName === 'DIV') {
+        this.messagesEl.lastChild.remove();
+      }
+      this.messages = await this.takeResponse();
+      for (const message of this.messages) {
+        this.layout.renderMessage(message.from, message.subject, message.received);
+      }
+    }, 3000);
+  }
+
+  async takeResponse() {
+    this.response = await this.api.initStream();
+    console.log(this.response); // значение записалось со второго раза
+    if (this.response) {
+      return this.response; // значение ушло
     }
   }
 }

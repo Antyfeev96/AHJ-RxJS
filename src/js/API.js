@@ -1,10 +1,18 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-return-assign */
 import { from } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
 
 export default class API {
   async initStream() {
     this.stream$ = ajax.getJSON('http://localhost:7070/messages/unread');
-    const response = from(this.stream$).subscribe((value) => console.log(value));
-    return response;
+    from(this.stream$).pipe(
+      map((value) => value.messages),
+    ).subscribe((value) => {
+      this.response = value;
+    });
+    console.log(this.response); // значение записалось со второй
+    return this.response; // значение ушло
   }
 }
