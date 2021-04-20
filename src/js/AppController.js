@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable consistent-return */
 /* eslint-disable no-return-assign */
 export default class AppController {
@@ -8,27 +9,38 @@ export default class AppController {
 
   async init() {
     this.layout.init();
-    this.messagesEl = document.querySelector('.messages');
-    this.initStream();
+    this.messagesEl = Array.from(document.querySelectorAll('.message'));
+    await this.initStream();
   }
 
   async initStream() {
-    setInterval(async () => {
-      while (this.messagesEl.lastChild && this.messagesEl.lastChild.nodeName === 'DIV') {
-        this.messagesEl.lastChild.remove();
-      }
-      this.messages = await this.takeResponse();
-      for (const message of this.messages) {
-        this.layout.renderMessage(message.from, message.subject, message.received);
-      }
-    }, 3000);
-  }
+    this.subscription$ = await this.api.initStream().then((stream) => {
+      stream.subscribe(async (messages) => {
+        while (document.querySelector('.message') !== null) {
+          document.querySelector('.message').remove();
+        }
+        for (const message of messages) {
+          this.layout.renderMessage(message.from, message.subject, message.received);
+        }
+        // if (stream) {
+        //   console.log(stream);
+        //   await stream.unsubscribe(); не работает, приложение не падает, ошибка unsubscribe is not a function
+        // }
+      });
+    });
+    // this.subscription$ = await this.api.initStream();
+    // this.subscription$.subscribe((messages) => {
+    //   while (document.querySelector('.message') !== null) {
+    //     document.querySelector('.message').remove();
+    //   }
 
-  async takeResponse() {
-    this.response = await this.api.initStream();
-    console.log(this.response); // значение записалось со второго раза
-    if (this.response) {
-      return this.response; // значение ушло
-    }
+    //   for (const message of messages) {
+    //     this.layout.renderMessage(message.from, message.subject, message.received);
+    //   }
+    // });
+    // if (this.subscription$) {
+    //   this.subscription$.unsubscribe();
+    //   не работает, приложение падает, unsubscribe is not a function;
+    // }
   }
 }
