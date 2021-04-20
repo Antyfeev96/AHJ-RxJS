@@ -22,11 +22,12 @@ export default class AppRender {
 
   renderMessage(email, text, timestamp) {
     this.text = text.length <= 15 ? text : `${text.substr(0, 15)}...`;
+    this.email = email.length <= 20 ? email : `${email.substr(0, 20)}...`;
     this.messageEl = document.createElement('div');
     this.messageEl.className = 'message';
     this.contactEl = document.createElement('div');
     this.contactEl.className = 'message__contact';
-    this.contactEl.textContent = email;
+    this.contactEl.textContent = this.email;
     this.textEl = document.createElement('div');
     this.textEl.className = 'message__text';
     this.textEl.textContent = this.text;
