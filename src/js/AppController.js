@@ -7,40 +7,22 @@ export default class AppController {
     this.api = api;
   }
 
-  async init() {
+  init() {
     this.layout.init();
     this.messagesEl = Array.from(document.querySelectorAll('.message'));
-    await this.initStream();
+    this.initStream();
   }
 
-  async initStream() {
-    this.subscription$ = await this.api.initStream().then((stream) => {
-      stream.subscribe(async (messages) => {
-        while (document.querySelector('.message') !== null) {
-          document.querySelector('.message').remove();
-        }
-        for (const message of messages) {
-          this.layout.renderMessage(message.from, message.subject, message.received);
-        }
-        // if (stream) {
-        //   console.log(stream);
-        //   await stream.unsubscribe(); не работает, приложение не падает, ошибка unsubscribe is not a function
-        // }
-      });
-    });
-    // this.subscription$ = await this.api.initStream();
-    // this.subscription$.subscribe((messages) => {
-    //   while (document.querySelector('.message') !== null) {
-    //     document.querySelector('.message').remove();
-    //   }
+  initStream() {
+    this.stream$ = this.api.initStream();
+    this.subsciption = this.stream$.subscribe((messages) => {
+      while (document.querySelector('.message') !== null) {
+        document.querySelector('.message').remove();
+      }
 
-    //   for (const message of messages) {
-    //     this.layout.renderMessage(message.from, message.subject, message.received);
-    //   }
-    // });
-    // if (this.subscription$) {
-    //   this.subscription$.unsubscribe();
-    //   не работает, приложение падает, unsubscribe is not a function;
-    // }
+      for (const message of messages) {
+        this.layout.renderMessage(message.from, message.subject, message.received);
+      }
+    });
   }
 }
